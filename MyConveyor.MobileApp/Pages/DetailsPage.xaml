@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyConveyor.MobileApp.Pages.DetailsPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+ios:Page.UseSafeArea="true">
+    <Grid x:Name="SlMainGrid" HorizontalOptions="FillAndExpand" BackgroundColor="#c0c0c0" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="56*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalOptions="FillAndExpand"  BackgroundColor="#5b6b71" VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" x:Name="ImgBack" Source="Back.png"  HorizontalOptions="CenterAndExpand" Margin="3,3,0,3"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="40" WidthRequest="40"/>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="30*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Grid.ColumnSpan="3" x:Name="ImgCart" Source="Cart1.png"  HorizontalOptions="CenterAndExpand" Margin="3,3,0,3"
+               VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="37" WidthRequest="37"/>
+                <Image Grid.Column="1" x:Name="ImgCicle" Source="FilledCircleBlack.png" BackgroundColor="Transparent"  HorizontalOptions="Center"
+               VerticalOptions="StartAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="25" WidthRequest="25"/>
+                <Label Text="{Binding CartCount}" TextColor="White" Grid.Column="1"  HorizontalTextAlignment="Center" HorizontalOptions="Center"  VerticalOptions="StartAndExpand" BackgroundColor="Transparent" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" FontSize="Small" />
+            </Grid>
+        </Grid>
+        <Image Grid.Row="1" x:Name="ImgItemImage" Source="{Binding ThumbnailSource}" Margin="5" 
+               HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="200" WidthRequest="200" />
+        <ActivityIndicator Grid.Row="1" IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                               Color="#f09e1b" />
+        <StackLayout Grid.Row="2" Orientation="Vertical" >
+            <Grid  VerticalOptions="StartAndExpand" Margin="15,0,15,0"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Serial Number : " HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" ></Label>
+                <Label Grid.Column="1" Text="{Binding SerialNumber}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" ></Label>
+            </Grid>
+            <Grid  VerticalOptions="StartAndExpand"  Margin="15,0,15,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Item Code : " HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" ></Label>
+                <Label Grid.Column="1" Text="{Binding ItemCode}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" ></Label>
+            </Grid>
+            <Grid  VerticalOptions="StartAndExpand"  Margin="15,0,15,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Amount Used : " HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" ></Label>
+                <Label Grid.Column="1" Text="{Binding AmountUsed}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" ></Label>
+            </Grid>
+            <Grid Margin="15,0,15,0" VerticalOptions="StartAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="70*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Description : " Grid.Column="0"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" ></Label>
+                <ScrollView Orientation="Vertical" Grid.Column="1" >
+                    <Label Text="{Binding ItemDescription}"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" ></Label>
+                </ScrollView>
+            </Grid>
+            <Button x:Name="BtnAddtoCart" TextColor="Black"  BackgroundColor="#f09e1b"  Command="{Binding AddCartTapCommand}" FontSize="Large"
+                     Text="Add to Cart" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" BorderColor="Black" BorderWidth="0.5" WidthRequest="230" >
+                <Button.CornerRadius>
+                    <OnPlatform x:TypeArguments="x:Int32" iOS="22" Android="45"/>
+                </Button.CornerRadius>
+            </Button>
+        </StackLayout>
+    </Grid>
+</ContentPage>

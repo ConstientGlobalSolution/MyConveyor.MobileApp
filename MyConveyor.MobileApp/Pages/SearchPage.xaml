@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"            
+             x:Class="MyConveyor.MobileApp.Pages.SearchPage"
+             xmlns:customentry="clr-namespace:MyConveyor.MobileApp.CustomClasses"
+             Title="SearchPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+ios:Page.UseSafeArea="true">
+
+    <Grid x:Name="SlMainGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" BackgroundColor="#f09e1b" VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42*"/>
+                    <ColumnDefinition Width="30*"/>
+                    <ColumnDefinition Width="28*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Grid.ColumnSpan="3" x:Name="ImgCart" Source="Cart1.png"  HorizontalOptions="CenterAndExpand" Margin="3,3,0,3"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="40" WidthRequest="40"/>
+                <Image Grid.Column="1" x:Name="ImgCicle" Source="FilledCircleBlack.png" BackgroundColor="Transparent"  HorizontalOptions="Center" 
+                   VerticalOptions="StartAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="20" WidthRequest="25"/>
+                <Label Text="{Binding CartCount}" TextColor="White" Grid.Column="1"  HorizontalTextAlignment="Center" HorizontalOptions="Center"  VerticalOptions="StartAndExpand" BackgroundColor="Transparent" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" FontSize="Small" >
+
+                </Label>
+            </Grid>
+        </Grid>
+        <Image Grid.Row="2" x:Name="ImgBarCodeScan" Source="qrcode.png" Margin="5" 
+               HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="300" WidthRequest="300" />
+        <ActivityIndicator Grid.Row="2" IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                               Color="#f09e1b" />
+        <Frame  BorderColor="{Binding EntryBorderColor}" BackgroundColor="White" Grid.Row="3"   HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"  Margin="10,0,10,0"  Padding="2" >
+            <customentry:CustomEntry  x:Name="TxtSerialNumber"  HorizontalOptions="FillAndExpand"  Placeholder="Enter Serial Number"  Text="{Binding SerialNumber}"
+                    TextColor="#586b77" PlaceholderColor="#aec1cc" VerticalOptions="CenterAndExpand" FontSize="Medium" BackgroundColor="Transparent"/>
+        </Frame>
+
+
+        <Button x:Name="BtnSearch" TextColor="Black" Grid.Row="4" BackgroundColor="#f09e1b"  Command="{Binding SearchCommand}" FontSize="Large"
+               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="Search" BorderColor="Black" BorderWidth="0.5" WidthRequest="230"  >
+            <Button.CornerRadius>
+                <OnPlatform x:TypeArguments="x:Int32" iOS="22" Android="45"/>
+            </Button.CornerRadius>
+        </Button>
+
+    </Grid>
+
+</ContentPage>

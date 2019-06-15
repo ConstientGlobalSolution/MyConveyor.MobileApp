@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MyConveyor.MobileApp.CustomClasses" 
+             x:Class="MyConveyor.MobileApp.Pages.NewSearchResults" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <Grid x:Name="SlMainGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="91*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" BackgroundColor="#5b6b71" VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" x:Name="ImgBack" Source="Back.png"  HorizontalOptions="CenterAndExpand" Margin="3,3,0,3"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="40" WidthRequest="40"/>
+                <Image Grid.Column="1" x:Name="ImgFilter" Source="Filter.png"  HorizontalOptions="CenterAndExpand" Margin="3,3,0,3"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="40" WidthRequest="40"/>
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="42*"/>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="28*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Grid.ColumnSpan="3" x:Name="ImgCart" Source="Cart1.png"  HorizontalOptions="CenterAndExpand" Margin="3,3,0,3"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="37" WidthRequest="37"/>
+                    <Image Grid.Column="1" x:Name="ImgCicle" Source="FilledCircleBlack.png" BackgroundColor="Transparent"  HorizontalOptions="Center" 
+                   VerticalOptions="StartAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="20" WidthRequest="25"/>
+                    <Label Text="{Binding CartCount}" TextColor="White" Grid.Column="1"  HorizontalTextAlignment="Center" HorizontalOptions="Center"  VerticalOptions="StartAndExpand" BackgroundColor="Transparent" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" FontSize="Small" />
+                </Grid>
+            </Grid>
+            <StackLayout Grid.Row="2" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                <local:AlternatingListView Margin="5,0,5,0" ItemsSource="{Binding ProductsResultsList}" BackgroundColor="#ffffff"  RowHeight="130" >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout  Margin="3,0,3,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
+                                    <Image Source="{Binding ThumbnailSource}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+                                    <StackLayout Orientation="Vertical">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Code:" TextColor="Black"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                                            <Label Text="{Binding ItemCode}" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                                            <Label Text="Amount Used:" TextColor="Black" HorizontalTextAlignment="Start" HorizontalOptions="EndAndExpand" VerticalTextAlignment="Center" FontSize="Small" />
+                                            <Label Text="{Binding AmountUsed}" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                                        </StackLayout>
+                                        <Label Text="{Binding ItemDescription}"  TextColor="Black" WidthRequest="350" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand"  FontSize="Small" />
+                                        <StackLayout Orientation="Horizontal">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="20*"/>
+                                                    <ColumnDefinition Width="80*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Image Source="Checked.png" IsVisible="{Binding IsSparepart}" Grid.Column="0" Aspect="AspectFit"  HeightRequest="30" WidthRequest="30" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" >
+                                                </Image>
+                                                <Image Source="UnChecked.png" IsVisible="{Binding IsNotSparepart}" Grid.Column="0" Aspect="AspectFit"  HeightRequest="30" WidthRequest="30" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" >
+                                                </Image>
+
+                                                <Label Text="Spare Parts" Grid.Column="1" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" HorizontalOptions="StartAndExpand" />
+                                            </Grid>
+
+                                            <Button  BackgroundColor="#f09e1b" TextColor="Black" Clicked="OnAddCartTapped" FontSize="Small"
+               VerticalOptions="Center" HorizontalOptions="EndAndExpand" Text="Add To Cart" BorderColor="Black" BorderWidth="0.5"  >
+                                            </Button>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </local:AlternatingListView>
+            </StackLayout>
+            <ActivityIndicator Grid.Row="2" IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                               Color="#f09e1b" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

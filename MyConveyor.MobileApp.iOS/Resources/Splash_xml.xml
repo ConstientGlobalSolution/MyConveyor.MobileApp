@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <color android:color="#5b6b71"/>
+  </item>
+  <item>
+    <bitmap
+        android:src="@drawable/splash_logo"
+        android:tileMode="disabled"
+        android:scaleX="0.3"
+        android:scaleY="0.3"
+        android:gravity="fill"
+        
+        />
+  </item>
+</layer-list>

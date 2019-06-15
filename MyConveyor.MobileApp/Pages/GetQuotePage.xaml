@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyConveyor.MobileApp.Pages.GetQuotePage"
+             xmlns:customentry="clr-namespace:MyConveyor.MobileApp.CustomClasses"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+ios:Page.UseSafeArea="true">
+    <Grid x:Name="SlMainGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="38*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" BackgroundColor="#5b6b71" VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" x:Name="ImgBack" Source="Back.png"  HorizontalOptions="CenterAndExpand" Margin="3,3,0,3"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="40" WidthRequest="40"/>
+            <Label Text="GET A QUOTE" TextColor="White" Grid.Column="1" Margin="0,5,0,5" HorizontalTextAlignment="Center" BackgroundColor="Transparent" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" FontSize="Small" />
+
+        </Grid>
+
+        <ActivityIndicator Grid.Row="6" IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                               Color="#f09e1b" />
+        <Frame  BorderColor="{Binding NameBorderColor}" BackgroundColor="White" Grid.Row="1"   HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"  Margin="10,0,10,0"  Padding="2" >
+            <customentry:CustomEntry x:Name="TxtName" HorizontalOptions="FillAndExpand"  Placeholder="Name"  Text="{Binding UserDetails.FullName}"
+                    TextColor="#586b77" PlaceholderColor="#aec1cc" VerticalOptions="CenterAndExpand" FontSize="Medium" BackgroundColor="Transparent"/>
+        </Frame>
+        <Frame  BorderColor="{Binding CompanyBorderColor}" BackgroundColor="White" Grid.Row="2"   HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"  Margin="10,0,10,0"  Padding="2" >
+            <customentry:CustomEntry  x:Name="TxtCompanyName" HorizontalOptions="FillAndExpand"  Placeholder="Company Name"  Text="{Binding UserDetails.CompanyName}"
+                    TextColor="#586b77" PlaceholderColor="#aec1cc" VerticalOptions="CenterAndExpand" FontSize="Medium" BackgroundColor="Transparent"/>
+        </Frame>
+        <Frame  BorderColor="{Binding PhoneBorderColor}" BackgroundColor="White" Grid.Row="3"   HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"  Margin="10,0,10,0"  Padding="2" >
+            <customentry:CustomEntry x:Name="TxtPhoneNumber" HorizontalOptions="FillAndExpand" Placeholder="Phone Number"  Keyboard="Numeric" Text="{Binding UserDetails.Phone}"
+                    TextColor="#586b77" PlaceholderColor="#aec1cc" VerticalOptions="CenterAndExpand" FontSize="Medium" BackgroundColor="Transparent"/>
+        </Frame>
+        <Frame  BorderColor="{Binding MailBorderColor}" BackgroundColor="White" Grid.Row="4"   HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"  Margin="10,0,10,0"  Padding="2" >
+            <customentry:CustomEntry  x:Name="TxtEmailAddress" HorizontalOptions="FillAndExpand"  Placeholder="Email Address"  Text="{Binding UserDetails.Email}"
+                    TextColor="#586b77" PlaceholderColor="#aec1cc" VerticalOptions="CenterAndExpand" FontSize="Medium" BackgroundColor="Transparent"/>
+        </Frame>
+        <Button x:Name="BtnSubmit" TextColor="Black" Grid.Row="5" BackgroundColor="#f09e1b"  Command="{Binding SubmitCommand}" FontSize="Large"
+               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="Submit" BorderColor="Black" BorderWidth="0.5" WidthRequest="230"  >
+            <Button.CornerRadius>
+                <OnPlatform x:TypeArguments="x:Int32" iOS="22" Android="45"/>
+            </Button.CornerRadius>
+        </Button>
+    </Grid>
+</ContentPage>

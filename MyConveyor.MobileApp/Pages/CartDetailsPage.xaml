@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MyConveyor.MobileApp.CustomClasses"
+             x:Class="MyConveyor.MobileApp.Pages.CartDetailsPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+ios:Page.UseSafeArea="true">
+    <Grid x:Name="SlMainGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="92*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" BackgroundColor="#5b6b71" VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="60*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" x:Name="ImgBack" Source="Back.png"  HorizontalOptions="CenterAndExpand" Margin="3,3,0,3"
+                   VerticalOptions="CenterAndExpand" IsVisible="True" Aspect="AspectFit" HeightRequest="40" WidthRequest="40"/>
+        </Grid>
+        <StackLayout Grid.Row="1" Orientation="Vertical"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <local:AlternatingListView Margin="5,0,5,0" BackgroundColor="#ffffff" ItemsSource="{Binding SelectedCartList}" RowHeight="130" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HeightRequest="130" BackgroundColor="#dbe4e9" Margin="3,0,0,0" Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
+                                <Image Source="{Binding ThumbnailSource}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" >
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnViewMoreTapped">
+                                        </TapGestureRecognizer>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Item Code:" TextColor="Black"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                                        <Label Text="{Binding ItemCode}" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Amount Used:" TextColor="Black"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                                        <Label Text="{Binding AmountUsed}" TextColor="Black" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                                    </StackLayout>
+                                    <Label Text="{Binding ItemDescription}"  TextColor="Black" WidthRequest="350" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand"  FontSize="Small" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="20*"/>
+                                                <ColumnDefinition Width="30*"/>
+                                                <ColumnDefinition Width="20*"/>
+                                                <ColumnDefinition Width="30*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Source="MinusIcon.png" Aspect="AspectFit" Grid.Column="0" HeightRequest="40" WidthRequest="40" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnMinusTappedAsync">
+                                                    </TapGestureRecognizer>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Label Text="{Binding Quantity}" TextColor="Black" Margin="0,5,0,5" HorizontalTextAlignment="Center" BackgroundColor="White" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" Grid.Column="1" FontSize="Small" />
+                                            <Image Source="PlusIcon.png" Aspect="AspectFit" Grid.Column="2" HeightRequest="40" WidthRequest="40" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnPlusTapped">
+                                                    </TapGestureRecognizer>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Grid>
+                                        <Image Source="DeleteBin.png" Aspect="AspectFit" Grid.Column="11" HeightRequest="40" WidthRequest="40" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" >
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnDeleteTapped">
+                                                </TapGestureRecognizer>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </local:AlternatingListView>
+            <Button x:Name="BtnGetQuote" TextColor="Black" Grid.Row="5" BackgroundColor="#f09e1b"  FontSize="Large" Command="{Binding GetQuoteTapCommand}"
+                    HorizontalOptions="CenterAndExpand" Text="Get a Quote" 
+           VerticalOptions="StartAndExpand"  BorderColor="Black" BorderWidth="0.5" WidthRequest="230"  >
+                <Button.CornerRadius>
+                    <OnPlatform x:TypeArguments="x:Int32" iOS="22" Android="45"/>
+                </Button.CornerRadius>
+            </Button>
+        </StackLayout>
+        <ActivityIndicator Grid.Row="2" IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" 
+                               Color="#f09e1b" />
+    </Grid>
+</ContentPage>
